@@ -1,7 +1,12 @@
+# backend
 node_modules/
-.DS_Store
+
+# config
 *.log
 haters/
 .build/
+.env
 layout.md
-variables.env
+
+# macOS
+.DS_Store
