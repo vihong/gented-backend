@@ -1,4 +1,4 @@
-endpoint: https://eu1.prisma.sh/vi/gented-backend/dev
+endpoint: ${env:PRISMA_ENDPOINT}
 datamodel: datamodel.prisma
 #secret: 234567ejbehbd
 hooks:
