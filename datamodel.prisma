@@ -15,3 +15,18 @@ type Item {
   # updatedAt: DateTime!
   # user: User!
 }
+
+type Product{
+  id: ID! @id
+  title: String!
+  price: Int!
+  category: String!
+  description: String
+  images: [Image]
+}
+
+type Image{
+  id: ID! @unique @id
+  url: String!
+  product: Product
+}
