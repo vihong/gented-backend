@@ -19,14 +19,16 @@ type Item {
 type Product{
   id: ID! @id
   title: String!
-  price: Int!
+  price: Float!
   category: String!
   description: String
+  brand: String
   images: [Image]
 }
 
 type Image{
-  id: ID! @unique @id
+  id: ID! @id
+  name: String
   url: String!
   product: Product
 }

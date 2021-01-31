@@ -20,6 +20,7 @@ type BatchPayload {
 
 type Image {
   id: ID!
+  name: String
   url: String!
   product: Product
 }
@@ -31,16 +32,17 @@ type ImageConnection {
 }
 
 input ImageCreateInput {
+  name: String
   url: String!
   product: ProductCreateOneWithoutImagesInput
 }
 
 input ImageCreateManyWithoutProductInput {
   create: [ImageCreateWithoutProductInput!]
-  connect: [ImageWhereUniqueInput!]
 }
 
 input ImageCreateWithoutProductInput {
+  name: String
   url: String!
 }
 
@@ -52,6 +54,8 @@ type ImageEdge {
 enum ImageOrderByInput {
   id_ASC
   id_DESC
+  name_ASC
+  name_DESC
   url_ASC
   url_DESC
   createdAt_ASC
@@ -62,6 +66,7 @@ enum ImageOrderByInput {
 
 type ImagePreviousValues {
   id: ID!
+  name: String
   url: String!
 }
 
@@ -84,32 +89,13 @@ input ImageSubscriptionWhereInput {
 }
 
 input ImageUpdateInput {
+  name: String
   url: String
   product: ProductUpdateOneWithoutImagesInput
 }
 
 input ImageUpdateManyWithoutProductInput {
   create: [ImageCreateWithoutProductInput!]
-  delete: [ImageWhereUniqueInput!]
-  connect: [ImageWhereUniqueInput!]
-  disconnect: [ImageWhereUniqueInput!]
-  update: [ImageUpdateWithWhereUniqueWithoutProductInput!]
-  upsert: [ImageUpsertWithWhereUniqueWithoutProductInput!]
-}
-
-input ImageUpdateWithoutProductDataInput {
-  url: String
-}
-
-input ImageUpdateWithWhereUniqueWithoutProductInput {
-  where: ImageWhereUniqueInput!
-  data: ImageUpdateWithoutProductDataInput!
-}
-
-input ImageUpsertWithWhereUniqueWithoutProductInput {
-  where: ImageWhereUniqueInput!
-  update: ImageUpdateWithoutProductDataInput!
-  create: ImageCreateWithoutProductInput!
 }
 
 input ImageWhereInput {
@@ -127,6 +113,20 @@ input ImageWhereInput {
   id_not_starts_with: ID
   id_ends_with: ID
   id_not_ends_with: ID
+  name: String
+  name_not: String
+  name_in: [String!]
+  name_not_in: [String!]
+  name_lt: String
+  name_lte: String
+  name_gt: String
+  name_gte: String
+  name_contains: String
+  name_not_contains: String
+  name_starts_with: String
+  name_not_starts_with: String
+  name_ends_with: String
+  name_not_ends_with: String
   url: String
   url_not: String
   url_in: [String!]
@@ -145,10 +145,6 @@ input ImageWhereInput {
   AND: [ImageWhereInput!]
   OR: [ImageWhereInput!]
   NOT: [ImageWhereInput!]
-}
-
-input ImageWhereUniqueInput {
-  id: ID
 }
 
 type Item {
@@ -325,10 +321,7 @@ scalar Long
 
 type Mutation {
   createImage(data: ImageCreateInput!): Image!
-  updateImage(data: ImageUpdateInput!, where: ImageWhereUniqueInput!): Image
   updateManyImages(data: ImageUpdateInput!, where: ImageWhereInput): BatchPayload!
-  upsertImage(where: ImageWhereUniqueInput!, create: ImageCreateInput!, update: ImageUpdateInput!): Image!
-  deleteImage(where: ImageWhereUniqueInput!): Image
   deleteManyImages(where: ImageWhereInput): BatchPayload!
   createItem(data: ItemCreateInput!): Item!
   updateItem(data: ItemUpdateInput!, where: ItemWhereUniqueInput!): Item
@@ -367,9 +360,10 @@ type PageInfo {
 type Product {
   id: ID!
   title: String!
-  price: Int!
+  price: Float!
   category: String!
   description: String
+  brand: String
   images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image!]
 }
 
@@ -381,9 +375,10 @@ type ProductConnection {
 
 input ProductCreateInput {
   title: String!
-  price: Int!
+  price: Float!
   category: String!
   description: String
+  brand: String
   images: ImageCreateManyWithoutProductInput
 }
 
@@ -393,9 +388,10 @@ input ProductCreateOneWithoutImagesInput {
 
 input ProductCreateWithoutImagesInput {
   title: String!
-  price: Int!
+  price: Float!
   category: String!
   description: String
+  brand: String
 }
 
 type ProductEdge {
@@ -414,6 +410,8 @@ enum ProductOrderByInput {
   category_DESC
   description_ASC
   description_DESC
+  brand_ASC
+  brand_DESC
   createdAt_ASC
   createdAt_DESC
   updatedAt_ASC
@@ -423,9 +421,10 @@ enum ProductOrderByInput {
 type ProductPreviousValues {
   id: ID!
   title: String!
-  price: Int!
+  price: Float!
   category: String!
   description: String
+  brand: String
 }
 
 type ProductSubscriptionPayload {
@@ -448,9 +447,10 @@ input ProductSubscriptionWhereInput {
 
 input ProductUpdateInput {
   title: String
-  price: Int
+  price: Float
   category: String
   description: String
+  brand: String
   images: ImageUpdateManyWithoutProductInput
 }
 
@@ -464,9 +464,10 @@ input ProductUpdateOneWithoutImagesInput {
 
 input ProductUpdateWithoutImagesDataInput {
   title: String
-  price: Int
+  price: Float
   category: String
   description: String
+  brand: String
 }
 
 input ProductUpsertWithoutImagesInput {
@@ -503,14 +504,14 @@ input ProductWhereInput {
   title_not_starts_with: String
   title_ends_with: String
   title_not_ends_with: String
-  price: Int
-  price_not: Int
-  price_in: [Int!]
-  price_not_in: [Int!]
-  price_lt: Int
-  price_lte: Int
-  price_gt: Int
-  price_gte: Int
+  price: Float
+  price_not: Float
+  price_in: [Float!]
+  price_not_in: [Float!]
+  price_lt: Float
+  price_lte: Float
+  price_gt: Float
+  price_gte: Float
   category: String
   category_not: String
   category_in: [String!]
@@ -539,6 +540,20 @@ input ProductWhereInput {
   description_not_starts_with: String
   description_ends_with: String
   description_not_ends_with: String
+  brand: String
+  brand_not: String
+  brand_in: [String!]
+  brand_not_in: [String!]
+  brand_lt: String
+  brand_lte: String
+  brand_gt: String
+  brand_gte: String
+  brand_contains: String
+  brand_not_contains: String
+  brand_starts_with: String
+  brand_not_starts_with: String
+  brand_ends_with: String
+  brand_not_ends_with: String
   images_every: ImageWhereInput
   images_some: ImageWhereInput
   images_none: ImageWhereInput
@@ -548,7 +563,6 @@ input ProductWhereInput {
 }
 
 type Query {
-  image(where: ImageWhereUniqueInput!): Image
   images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image]!
   imagesConnection(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ImageConnection!
   item(where: ItemWhereUniqueInput!): Item
