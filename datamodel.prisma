@@ -17,7 +17,7 @@ type Item {
 }
 
 type Product{
-  id: ID! @id
+  id: ID! @id @unique
   title: String!
   price: Float!
   category: String!
