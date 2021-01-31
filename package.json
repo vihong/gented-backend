@@ -7,7 +7,8 @@
 		"start": "nodemon -e js,graphql -x node index.js",
 		"dev": "nodemon -e js,graphql -x node --inspect index.js",
 		"test": "jest",
-		"prisma": "cd prisma-server && prisma deploy --env-file ../.env"
+		"prisma": "prisma deploy --env-file variables.env",
+		"prismaf": "prisma deploy --force --env-file variables.env"
 	},
 	"dependencies": {
 		"babel-preset-env": "^1.7.0",

@@ -1,6 +1,0 @@
-endpoint: https://eu1.prisma.sh/vi/gented-backend/dev
-datamodel: datamodel.prisma
-#secret: 234567ejbehbd
-hooks:
-  post-deploy:
-    - graphql get-schema -p prisma

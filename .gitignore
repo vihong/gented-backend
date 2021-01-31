@@ -5,7 +5,7 @@ node_modules/
 *.log
 haters/
 .build/
-.env
+variables.env
 layout.md
 
 # macOS
