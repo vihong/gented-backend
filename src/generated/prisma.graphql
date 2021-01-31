@@ -330,7 +330,10 @@ type Mutation {
   deleteItem(where: ItemWhereUniqueInput!): Item
   deleteManyItems(where: ItemWhereInput): BatchPayload!
   createProduct(data: ProductCreateInput!): Product!
+  updateProduct(data: ProductUpdateInput!, where: ProductWhereUniqueInput!): Product
   updateManyProducts(data: ProductUpdateInput!, where: ProductWhereInput): BatchPayload!
+  upsertProduct(where: ProductWhereUniqueInput!, create: ProductCreateInput!, update: ProductUpdateInput!): Product!
+  deleteProduct(where: ProductWhereUniqueInput!): Product
   deleteManyProducts(where: ProductWhereInput): BatchPayload!
   createUser(data: UserCreateInput!): User!
   updateUser(data: UserUpdateInput!, where: UserWhereUniqueInput!): User
@@ -384,6 +387,7 @@ input ProductCreateInput {
 
 input ProductCreateOneWithoutImagesInput {
   create: ProductCreateWithoutImagesInput
+  connect: ProductWhereUniqueInput
 }
 
 input ProductCreateWithoutImagesInput {
@@ -460,6 +464,7 @@ input ProductUpdateOneWithoutImagesInput {
   upsert: ProductUpsertWithoutImagesInput
   delete: Boolean
   disconnect: Boolean
+  connect: ProductWhereUniqueInput
 }
 
 input ProductUpdateWithoutImagesDataInput {
@@ -562,12 +567,17 @@ input ProductWhereInput {
   NOT: [ProductWhereInput!]
 }
 
+input ProductWhereUniqueInput {
+  id: ID
+}
+
 type Query {
   images(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Image]!
   imagesConnection(where: ImageWhereInput, orderBy: ImageOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ImageConnection!
   item(where: ItemWhereUniqueInput!): Item
   items(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Item]!
   itemsConnection(where: ItemWhereInput, orderBy: ItemOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ItemConnection!
+  product(where: ProductWhereUniqueInput!): Product
   products(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): [Product]!
   productsConnection(where: ProductWhereInput, orderBy: ProductOrderByInput, skip: Int, after: String, before: String, first: Int, last: Int): ProductConnection!
   user(where: UserWhereUniqueInput!): User
