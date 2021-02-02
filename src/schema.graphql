@@ -17,7 +17,9 @@ type Mutation {
 		category: String!
 		description: String
 		brand: String
+		images: ImageCreateManyWithoutProductInput
 	): Product!
+	deleteProduct(id: ID!): Product
 }
 
 type Query {
@@ -25,6 +27,6 @@ type Query {
 	users: [User]
 	items: [Item]!
 	item(where: ItemWhereUniqueInput!): Item
-	product: Product
+	product(where: ProductWhereUniqueInput!): Product
 	products: [Product]!
 }
