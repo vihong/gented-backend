@@ -46,6 +46,19 @@ const Mutations = {
 		});
 		return newProduct;
 	},
+	updateProduct(parent, args, ctx, info) {
+		const updates = { ...args };
+		delete updates.id;
+		return ctx.db.mutation.updateProduct(
+			{
+				data  : updates,
+				where : {
+					id : args.id
+				}
+			},
+			info
+		);
+	},
 	async deleteProduct(parent, args, ctx, info) {
 		const where = { id: args.id };
 		const product = await ctx.db.query.product({ where }, `{id title}`); // 1. find the item
