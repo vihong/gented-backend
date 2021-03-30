@@ -1,5 +1,5 @@
 require('dotenv').config({ path: 'variables.env' });
-const createServer = require('./createServer');
+import { createServer } from './createServer';
 const db = require('./db');
 
 const server = createServer();
