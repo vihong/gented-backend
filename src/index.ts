@@ -6,12 +6,12 @@ const server = createServer();
 
 server.start(
 	{
-		cors : {
-			credentials : true,
-			origin      : process.env.FRONTEND_URL
+		cors: {
+			credentials: true,
+			origin: process.env.FRONTEND_URL
 		}
 	},
-	(details) => {
+	(details: any) => {
 		console.log(`Server is now running on port http://localhost:${details.port}`);
 	}
 );

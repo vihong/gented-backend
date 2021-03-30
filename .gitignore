@@ -4,7 +4,7 @@ node_modules/
 # config
 *.log
 haters/
-.build/
+built/*
 variables.env
 layout.md
 
