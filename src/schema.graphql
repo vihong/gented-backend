@@ -19,6 +19,7 @@ type Mutation {
 		brand: String
 		images: ImageCreateManyWithoutProductInput
 	): Product!
+	updateProduct(id: ID!, title: String, description: String, price: Float, brand: String, image: String): Product!
 	deleteProduct(id: ID!): Product
 }
 
