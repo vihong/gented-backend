@@ -4,13 +4,15 @@
 	"description": "Backend for Gented",
 	"main": "index.js",
 	"scripts": {
-		"start": "nodemon -e js,graphql -x node src/index.js",
-		"dev": "nodemon -e js,graphql -x node --inspect src/index.js",
+		"start": "nodemon -e js,graphql -x node built/index.js",
+		"build": "tsc -p tsconfig.json",
+		"dev": "nodemon -e js,graphql -x node --inspect built/index.js",
 		"test": "jest",
 		"prisma": "prisma deploy --env-file variables.env",
 		"prismaf": "prisma deploy --force --env-file variables.env"
 	},
 	"dependencies": {
+		"@types/graphql-resolvers": "^0.3.0",
 		"babel-preset-env": "^1.7.0",
 		"bcryptjs": "2.4.3",
 		"cookie-parser": "^1.4.3",
@@ -31,5 +33,8 @@
 		"presets": [
 			"env"
 		]
+	},
+	"devDependencies": {
+		"typescript": "^4.2.3"
 	}
 }
